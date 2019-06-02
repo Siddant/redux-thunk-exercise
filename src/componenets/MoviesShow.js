@@ -1,24 +1,22 @@
 import React from 'react'
-import axios from 'axios'
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as actionCreators from '../actions/index'
 
 
 class MoviesShow extends React.Component {
   constructor() {
     super()
-    this.state = {
-      search: '',
-      movie: [],
-      errors: {}
-    }
   }
   componentDidMount() {
-    axios.get(`https://www.omdbapi.com/?i=${this.props.match.params.id}&apikey=591dc16c`)
-      .then(res => this.setState({ movie: res.data }))
-      .catch(err => this.setState({ errors: err }))
+    this.props.getMovie(this.props.match.params.id)
+
   }
   render() {
-    const { Title, Year, imdbRating, Metascore, Poster, Runtime, Genre, Director, Writer, Actors, Plot, Language, Country, BoxOffice } = this.state.movie
-    if (!this.state) return null
+    const { Title, Year, imdbRating, Metascore, Poster, Runtime, Genre, Director, Writer, Actors, Plot, Language, Country, BoxOffice } = this.props.movie
+    if (!this.props.movie) return null
     return (
       <div className="section">
         <div className="container">
@@ -51,4 +49,17 @@ class MoviesShow extends React.Component {
   }
 }
 
-export default MoviesShow
+
+
+function mapStateToProps(state) {
+  return {
+    movie: state.movieShowReducer.movie,
+    errors: state.movieShowReducer.errors
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesShow)

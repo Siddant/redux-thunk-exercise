@@ -1,4 +1,4 @@
-import { MOVIE_SEARCH_RESULT, MOVIE_SEARCH_RESULT_ERROR } from './types'
+import { MOVIE_SEARCH_RESULT, MOVIE_SEARCH_RESULT_ERROR, MOVIE_DETAIL, MOVIE_DETAIL_ERROR } from './types'
 import axios from 'axios'
 const apikey = process.env.OMDB_KEY
 
@@ -21,12 +21,28 @@ export const searchMovie = (payload) => dispatch => {
 }
 
 
+export const getMovie = (id) => dispatch => {
+    axios.get(`https://www.omdbapi.com/?i=${id}&apikey=${apikey}`)
+        .then(res =>
+            dispatch({
+                type: MOVIE_DETAIL,
+                payload: res.data
+            })
+        )
+    // .catch(err =>
+
+    //     dispatch({
+    //         type: MOVIE_DETAIL_ERROR,
+    //         payload: err
+    //     })
+    // )
+};
 
 
-export const getMovie = (payload) => ({
-    type: type,
-    payload
-})
+
+// axios.get(`https://www.omdbapi.com/?i=${this.props.match.params.id}&apikey=591dc16c`)
+// .then(res => this.setState({ movie: res.data }))
+// .catch(err => this.setState({ errors: err }))
 
 
 

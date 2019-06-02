@@ -78,9 +78,9 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    results: state.movieReducers.results,
-    error: state.movieReducers.error,
-    searched: state.movieReducers.searched
+    results: state.movieReducer.results,
+    error: state.movieReducer.error,
+    searched: state.movieReducer.searched
   }
 }
 

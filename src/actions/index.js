@@ -1,16 +1,57 @@
-import { SEARCH_MOVIE } from './types'
+import { MOVIE_SEARCH_RESULT, MOVIE_SEARCH_RESULT_ERROR } from './types'
 import axios from 'axios'
 const apikey = process.env.OMDB_KEY
 
 export const searchMovie = (payload) => dispatch => {
     axios.get(`https://www.omdbapi.com/?s=${payload}&apikey=${apikey}`)
-        .then(res => dispatch({
-            type: SEARCH_MOVIE,
-            payload: res.data.Search
-        }))
+        .then(res => {
+            if (res.data.Response === 'True') {
+                dispatch({
+                    type: MOVIE_SEARCH_RESULT,
+                    payload: res.data.Search
+                })
+            }
+            else {
+                dispatch({
+                    type: MOVIE_SEARCH_RESULT_ERROR,
+                    payload: res.data.Search
+                })
+            }
+        })
 }
 
 
+
+
+export const getMovie = (payload) => ({
+    type: type,
+    payload
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// middleware examples
 
 // export const fetchPosts = () => dispatch => {
 //     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -58,14 +99,3 @@ export const searchMovie = (payload) => dispatch => {
 //         })
 //     }
 //   }
-
-
-
-
-
-export const getMovie = (payload) => ({
-    type: type,
-    payload
-})
-
-

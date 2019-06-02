@@ -1,9 +1,9 @@
-import { SEARCH_MOVIE } from '../actions/types'
+import { MOVIE_SEARCH_RESULT, MOVIE_SEARCH_RESULT_ERROR } from '../actions/types'
 
 
 
 const initialState = {
-    searched: 'Star',
+    searched: '',
     search: '',
     results: [],
     error: ''
@@ -11,8 +11,12 @@ const initialState = {
 
 const movieReducers = (state = initialState, { type, payload }) => {
     switch (type) {
-        case SEARCH_MOVIE:
-            // console.log(type, payload)
+        case MOVIE_SEARCH_RESULT:
+            console.log(payload)
+            return { ...state, results: payload }
+        // this.setState({ results: res.data.Search, error: '', searched: this.state.search })
+        case MOVIE_SEARCH_RESULT_ERROR:
+            console.log(payload)
             return { ...state, results: payload }
         default:
             return state

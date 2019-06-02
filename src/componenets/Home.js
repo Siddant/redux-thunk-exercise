@@ -26,7 +26,7 @@ class Home extends React.Component {
     //   error: ''
     // }
 
-    this.delayedCallback = debounce(this.apiCall, 1000)
+    // this.delayedCallback = debounce(this.apiCall, 1000)
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,18 +34,15 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.searchMovie('star')
-    console.log(this.props)
-    // axios.get(`https://www.omdbapi.com/?s=star&apikey=${apikey}`)
-    //   .then(res => this.setState({ results: res.data.Search }))
   }
 
-  apiCall() {
-    axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&apikey=${apikey}`)
-      .then(res => {
-        if (res.data.Response === 'True') this.setState({ results: res.data.Search, error: '', searched: this.state.search })
-        else this.setState({ results: [], error: res.data.Error, searched: this.state.search })
-      })
-  }
+  // apiCall() {
+  //   axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&apikey=${apikey}`)
+  //     .then(res => {
+  //       if (res.data.Response === 'True') this.setState({ results: res.data.Search, error: '', searched: this.state.search })
+  //       else this.setState({ results: [], error: res.data.Error, searched: this.state.search })
+  //     })
+  // }
 
   handleChange({ target: { name, value } }) {
     this.setState({ ...this.state, [name]: value })
@@ -76,7 +73,7 @@ class Home extends React.Component {
         </section>
         <section className="section">
           <div className="container">
-            {/* <h2 className="title is-1">Movies with {this.state.searched} in their title</h2> */}
+            <h2 className="title is-1">Movies with {this.props.searched} in their title</h2>
 
             <div className="columns is-multiline">
               {this.props.results && this.props.results.map(result =>
@@ -86,9 +83,9 @@ class Home extends React.Component {
                   <SearchResults {...result} />
                 </div>
               )}
-              {/* <div className="column">
-                <p>{this.state.error}</p>
-              </div> */}
+              <div className="column">
+                <p>{this.props.error}</p>
+              </div>
 
             </div>
           </div>
@@ -100,9 +97,10 @@ class Home extends React.Component {
 
 
 function mapStateToProps(state) {
-  console.log(state.movieReducers.searched)
   return {
-    results: state.movieReducers.results
+    results: state.movieReducers.results,
+    error: state.movieReducers.error,
+    searched: state.movieReducers.searched
   }
 }
 

@@ -5,15 +5,14 @@ import { connect } from 'react-redux';
 
 import * as actionCreators from '../actions/index'
 
-
-// import debounce from 'lodash/debounce'
+import debounce from 'lodash/debounce'
 
 import SearchResults from './SearchResults'
 
 class Home extends React.Component {
   constructor() {
     super()
-    // this.delayedCallback = debounce(this.apiCall, 1000)
+    this.delayedCallback = debounce(this.apiCall, 1000)
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,23 +22,17 @@ class Home extends React.Component {
     this.props.searchMovie('star')
   }
 
-  // apiCall() {
-  //   axios.get(`https://www.omdbapi.com/?s=${this.state.search}&type=movie&apikey=${apikey}`)
-  //     .then(res => {
-  //       if (res.data.Response === 'True') this.setState({ results: res.data.Search, error: '', searched: this.state.search })
-  //       else this.setState({ results: [], error: res.data.Error, searched: this.state.search })
-  //     })
-  // }
+  apiCall() {
+    this.props.searchMovie(this.state.search)
+  }
 
   handleChange({ target: { name, value } }) {
     this.setState({ ...this.state, [name]: value })
-    // this.delayedCallback()
+    this.delayedCallback()
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.searchMovie(this.state.search)
-    // console.log(this.props.searchMovie)
   }
 
   render() {

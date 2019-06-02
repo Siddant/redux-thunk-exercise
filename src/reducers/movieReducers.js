@@ -12,7 +12,7 @@ const initialState = {
 const movieReducers = (state = initialState, { type, payload }) => {
     switch (type) {
         case SEARCH_MOVIE:
-            console.log(type, payload)
+            // console.log(type, payload)
             return { ...state, results: payload }
         default:
             return state

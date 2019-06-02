@@ -19,12 +19,12 @@ import SearchResults from './SearchResults'
 class Home extends React.Component {
   constructor() {
     super()
-    this.state = {
-      searched: 'Star',
-      search: '',
-      results: [],
-      error: ''
-    }
+    // this.state = {
+    //   searched: 'Star',
+    //   search: '',
+    //   results: [],
+    //   error: ''
+    // }
 
     this.delayedCallback = debounce(this.apiCall, 1000)
 
@@ -59,6 +59,7 @@ class Home extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <section className="section">
@@ -75,17 +76,19 @@ class Home extends React.Component {
         </section>
         <section className="section">
           <div className="container">
-            <h2 className="title is-1">Movies with {this.state.searched} in their title</h2>
+            {/* <h2 className="title is-1">Movies with {this.state.searched} in their title</h2> */}
 
             <div className="columns is-multiline">
-              {this.state.results && this.state.results.map(result =>
+              {this.props.results && this.props.results.map(result =>
+
                 <div className="column is-one-fifth" key={result.imdbID}>
+
                   <SearchResults {...result} />
                 </div>
               )}
-              <div className="column">
+              {/* <div className="column">
                 <p>{this.state.error}</p>
-              </div>
+              </div> */}
 
             </div>
           </div>
@@ -99,7 +102,7 @@ class Home extends React.Component {
 function mapStateToProps(state) {
   console.log(state.movieReducers.searched)
   return {
-    state: state
+    results: state.movieReducers.results
   }
 }
 

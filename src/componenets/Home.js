@@ -2,10 +2,16 @@ import React from 'react'
 import axios from 'axios'
 // const apikey = process.env.apiToken
 
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as actionCreators from '../actions/index'
+
+
 const apikey = process.env.OMDB_KEY
 
 
-console.log(apikey)
 import debounce from 'lodash/debounce'
 
 import SearchResults from './SearchResults'
@@ -27,8 +33,9 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`https://www.omdbapi.com/?s=star&apikey=${apikey}`)
-      .then(res => this.setState({ results: res.data.Search }))
+    this.props.searchMovie('star')
+    // axios.get(`https://www.omdbapi.com/?s=star&apikey=${apikey}`)
+    //   .then(res => this.setState({ results: res.data.Search }))
   }
 
   apiCall() {
@@ -42,15 +49,16 @@ class Home extends React.Component {
 
   handleChange({ target: { name, value } }) {
     this.setState({ ...this.state, [name]: value })
-    this.delayedCallback()
+    // this.delayedCallback()
   }
 
   handleSubmit(e) {
     e.preventDefault()
+    this.props.searchMovie(this.state.search)
+    // console.log(this.props.searchMovie)
   }
 
   render() {
-    console.log(this.state.search)
     return (
       <div>
         <section className="section">
@@ -87,4 +95,16 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+
+function mapStateToProps(state) {
+  console.log(state.movieReducers.searched)
+  return {
+    state: state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

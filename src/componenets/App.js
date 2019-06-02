@@ -1,11 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-class App extends Component {
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import 'bulma'
+import '../../src/style.scss'
+
+import Home from './Home.js'
+import MoviesShow from './MoviesShow.js'
+import Nav from './Nav.js'
+
+
+class App extends React.Component {
     render() {
         return (
-            <div>
-
-            </div>
+            <BrowserRouter>
+                <main>
+                    <Nav />
+                    <Switch>
+                        <Route path="/movies/:id" component={MoviesShow} />
+                        <Route path="/" component={Home} />
+                    </Switch>
+                </main>
+            </BrowserRouter>
         )
     }
 }

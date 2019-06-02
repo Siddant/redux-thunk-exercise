@@ -8,7 +8,6 @@ import App from './componenets/App'
 
 ReactDOM.render(
     <Provider store={store}>
-
         <App />
     </Provider>
     ,

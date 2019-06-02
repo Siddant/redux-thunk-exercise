@@ -1,16 +1,10 @@
-import { constantName } from '../actions/types'
+import { combineReducers } from 'redux'
 
-const initialState = {
 
-}
+import movieReducers from './movieReducers'
 
-const rootReducer = (state = initialState, { type, payload }) => {
-    switch (type) {
-        case constantName:
-            return { ...state, ...payload }
-        default:
-            return state
-    }
-}
+
+const rootReducer = combineReducers({ movieReducers })
+
 
 export default rootReducer

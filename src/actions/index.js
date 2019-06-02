@@ -8,13 +8,13 @@ export const searchMovie = (payload) => dispatch => {
             if (res.data.Response === 'True') {
                 dispatch({
                     type: MOVIE_SEARCH_RESULT,
-                    payload: res.data.Search
+                    payload: { results: res.data.Search, search: payload }
                 })
             }
             else {
                 dispatch({
                     type: MOVIE_SEARCH_RESULT_ERROR,
-                    payload: res.data.Search
+                    payload: { error: res.data.Error, search: payload }
                 })
             }
         })

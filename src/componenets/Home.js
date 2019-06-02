@@ -1,7 +1,4 @@
 import React from 'react'
-import axios from 'axios'
-// const apikey = process.env.apiToken
-
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,23 +6,13 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index'
 
 
-const apikey = process.env.OMDB_KEY
-
-
-import debounce from 'lodash/debounce'
+// import debounce from 'lodash/debounce'
 
 import SearchResults from './SearchResults'
 
 class Home extends React.Component {
   constructor() {
     super()
-    // this.state = {
-    //   searched: 'Star',
-    //   search: '',
-    //   results: [],
-    //   error: ''
-    // }
-
     // this.delayedCallback = debounce(this.apiCall, 1000)
 
     this.handleChange = this.handleChange.bind(this)

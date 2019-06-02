@@ -13,7 +13,6 @@ class Home extends React.Component {
   constructor() {
     super()
     this.delayedCallback = debounce(this.apiCall, 1000)
-
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }

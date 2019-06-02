@@ -29,20 +29,14 @@ export const getMovie = (id) => dispatch => {
                 payload: res.data
             })
         )
-    // .catch(err =>
-
-    //     dispatch({
-    //         type: MOVIE_DETAIL_ERROR,
-    //         payload: err
-    //     })
-    // )
+        .catch(err =>
+            dispatch({
+                type: MOVIE_DETAIL_ERROR,
+                payload: err
+            })
+        )
 };
 
-
-
-// axios.get(`https://www.omdbapi.com/?i=${this.props.match.params.id}&apikey=591dc16c`)
-// .then(res => this.setState({ movie: res.data }))
-// .catch(err => this.setState({ errors: err }))
 
 
 

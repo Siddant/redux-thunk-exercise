@@ -34,6 +34,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.searchMovie('star')
+    console.log(this.props)
     // axios.get(`https://www.omdbapi.com/?s=star&apikey=${apikey}`)
     //   .then(res => this.setState({ results: res.data.Search }))
   }
@@ -43,7 +44,6 @@ class Home extends React.Component {
       .then(res => {
         if (res.data.Response === 'True') this.setState({ results: res.data.Search, error: '', searched: this.state.search })
         else this.setState({ results: [], error: res.data.Error, searched: this.state.search })
-        console.log(this.state)
       })
   }
 
